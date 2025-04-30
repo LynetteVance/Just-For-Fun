@@ -20,55 +20,223 @@
   <div id="quest-details">
     <!-- Quest Details will be dynamically updated here -->
   </div>
+
+  <div id="inventory" style="display:none;">
+    <h3>Inventory</h3>
+    <ul id="inventory-list">
+      <li>Potion of Health</li>
+      <li>Fire Sword</li>
+      <li>Map of Emberdeep</li>
+    </ul>
+  </div>
 </section>
 
 <script>
+  let playerStats = {
+    strength: 10,
+    intelligence: 8,
+    charisma: 6,
+    health: 100
+  };
+
   function startQuest(quest) {
     let message = '';
     let questDetail = '';
+    let questImage = '';
+    let questAudio = '';
+    let backgroundColor = '';
+    let questStages = [];
+    let npcDialogue = '';
 
-    // Determine the quest description based on the selected quest
     if (quest === 'findDragon') {
       message = 'You embark on a perilous journey to Emberdeep to face the legendary Black Dragon...';
       questDetail = `
         <h3>Quest: Find the Dragon in Emberdeep</h3>
-        <p>The air is thick with the smoke of burning villages as you venture deeper into the heart of Emberdeep. The Black Dragon awaits, guarding treasures and ancient knowledge.</p>
-        <button onclick="completeQuest('findDragon')">Begin Quest</button>
+        <p>The air is thick with the smoke of burning villages as you venture deeper into the heart of Emberdeep. The Black Dragon awaits, guarding treasures and ancient knowledge. Only the bravest dare to seek the beast, for it is said that none who challenge it ever return.</p>
+        <h4>Quest Lore:</h4>
+        <p>Long ago, Emberdeep was a peaceful valley known for its fertile lands and rich mining resources. That was until the Black Dragon came to claim the land, burning the villages and claiming the ancient ruins as its lair. The people of Emberdeep are in desperate need of a hero to slay the beast and return peace to the land.</p>
+        <h4>Your Mission:</h4>
+        <p>Your task is to journey into the heart of Emberdeep, locate the Dragon’s lair, and slay the beast. Along the way, you may need to find allies, gather supplies, or overcome obstacles in your path.</p>
+        <h4>Important NPCs:</h4>
+        <ul>
+          <li><strong>Old Sorcerer</strong> - "The Black Dragon is not merely a beast; it is a creature of ancient magic. You will need more than strength to defeat it."</li>
+          <li><strong>Thorn, the Hunter</strong> - "I can show you the path through the Emberdeep wilds, but be warned, many dangers lurk there."</li>
+        </ul>
+        <button onclick="chooseStage('stage1', 'findDragon')">Start Journey to Emberdeep</button>
       `;
+      questImage = "emberdeep-landscape.jpg";
+      questAudio = "dragon-roar.mp3";
+      backgroundColor = "#b23a2f";
+      questStages = ['stage1', 'stage2', 'stage3', 'finalBattle'];
+      npcDialogue = "The Old Sorcerer warns you of the treacherous path ahead.";
     } else if (quest === 'rescuePrincess') {
       message = 'You make your way to the dark and mystical lands of Nythera to rescue Princess Lyssa...';
       questDetail = `
         <h3>Quest: Rescue Princess Lyssa from Nythera</h3>
-        <p>Dark clouds swirl above as you enter Nythera, where sorcery and shadow reign. The princess is held captive in the heart of the haunted castle, surrounded by mythical creatures.</p>
-        <button onclick="completeQuest('rescuePrincess')">Begin Quest</button>
+        <p>Dark clouds swirl above as you enter Nythera, where sorcery and shadow reign. The princess is held captive in the heart of the haunted castle, surrounded by mythical creatures. You must traverse haunted forests, ancient graveyards, and enchanted swamps to reach her.</p>
+        <h4>Quest Lore:</h4>
+        <p>Princess Lyssa, once the beacon of hope for the kingdom of Nythera, was kidnapped by a dark sorcerer known as Malgrim. After the princess was taken, the kingdom fell into despair. It is said that only a hero of great heart can break the curse and free her from her captor's grasp.</p>
+        <h4>Your Mission:</h4>
+        <p>Your task is to venture into the cursed lands of Nythera, defeat the dark forces that guard the princess, and rescue her from the sorcerer's grasp. You will face powerful enemies and navigate treacherous terrain.</p>
+        <h4>Important NPCs:</h4>
+        <ul>
+          <li><strong>Rhea, the Mystic</strong> - "I can help you break the curse that binds the princess, but first, you must bring me the Soulstone from the depths of the Haunted Forest."</li>
+          <li><strong>Sir Aldric, the Knight</strong> - "The castle is heavily guarded. Only the bravest dare approach the walls, and even fewer survive."</li>
+        </ul>
+        <button onclick="chooseStage('stage1', 'rescuePrincess')">Start Journey to Nythera</button>
       `;
+      questImage = "nythera-castle.jpg";
+      questAudio = "mystical-sounds.mp3";
+      backgroundColor = "#3b3b6e";
+      questStages = ['stage1', 'stage2', 'stage3', 'finalRescue'];
+      npcDialogue = "Sir Aldric warns you of the dangers within Nythera.";
     } else if (quest === 'conquerVortalis') {
-      message = 'A fierce storm rages around you as you set foot in the windswept land of Vortalis...';
+      message = 'You are about to set foot in the tempestuous lands of Vortalis, a land where storms rule the sky...';
       questDetail = `
         <h3>Quest: Conquer the Storms of Vortalis</h3>
-        <p>The winds howl like wolves as you approach the stormy land of Vortalis. Only the bravest dare challenge its unpredictable nature and fierce elemental forces.</p>
-        <button onclick="completeQuest('conquerVortalis')">Begin Quest</button>
+        <p>The land of Vortalis is a place of eternal storms. Winds howl like wolves, lightning strikes with furious speed, and the very air crackles with elemental power. The land is unforgiving, but you must face the challenge if you seek the legendary Storm's Heart—a gem said to control the weather itself.</p>
+        <h4>Quest Lore:</h4>
+        <p>The storms of Vortalis have raged for centuries, and no one knows why. The ancient civilization that once inhabited the land disappeared mysteriously, leaving behind only ruins and tales of a powerful artifact—the Storm's Heart. It is said that whoever controls the gem can master the storms themselves.</p>
+        <h4>Your Mission:</h4>
+        <p>Your mission is to travel into the heart of the Vortalis storm, survive its dangers, and claim the Storm's Heart. Along the way, you must overcome violent weather, fierce creatures, and ancient puzzles left behind by the lost civilization.</p>
+        <h4>Important NPCs:</h4>
+        <ul>
+          <li><strong>Zephyra, the Wind Warden</strong> - "The storms will test your resolve. Only the worthy can survive them."</li>
+          <li><strong>Garrick, the Tempest Knight</strong> - "If you wish to survive, you must learn the ancient ways of storm manipulation. I can teach you, but it comes at a cost."</li>
+        </ul>
+        <button onclick="chooseStage('stage1', 'conquerVortalis')">Start Journey to Vortalis</button>
       `;
+      questImage = "vortalis-storms.jpg";
+      questAudio = "storm-winds.mp3";
+      backgroundColor = "#2e3c4f";
+      questStages = ['stage1', 'stage2', 'stage3', 'finalChallenge'];
+      npcDialogue = "Zephyra warns you of the destructive forces of Vortalis.";
     }
 
-    // Display the quest details dynamically
+    // Show the message, background, and quest details
     alert(message);
     document.getElementById('quest-details').innerHTML = questDetail;
+    document.body.style.backgroundColor = backgroundColor;
+    document.getElementById('inventory').style.display = 'block';
+
+    // Play ambient sound if available
+    if (questAudio) {
+      const audio = new Audio(questAudio);
+      audio.play();
+    }
   }
 
-  function completeQuest(quest) {
-    let completionMessage = '';
+  // Quest stages for different quests
+  function chooseStage(stage, quest) {
+    let stageDetail = '';
+    let stageMessage = '';
 
     if (quest === 'findDragon') {
-      completionMessage = 'You have set off to Emberdeep. The Dragon awaits...';
+      if (stage === 'stage1') {
+        stageMessage = 'You journey through Emberdeep, battling beasts and overcoming obstacles...';
+        stageDetail = `
+          <h3>Stage 1: Entering Emberdeep</h3>
+          <p>The path ahead is dangerous. Your first challenge is a group of fire-breathing lizards. Do you choose to fight or sneak by?</p>
+          <button onclick="chooseAction('fight', 'findDragon', 'stage2')">Fight the Lizards</button>
+          <button onclick="chooseAction('sneak', 'findDragon', 'stage2')">Sneak Past</button>
+        `;
+      } else if (stage === 'stage2') {
+        stageMessage = 'You approach the dragon’s lair...';
+        stageDetail = `
+          <h3>Stage 2: The Dragon’s Lair</h3>
+          <p>You stand before the legendary Black Dragon’s lair. The beast stirs, its eyes glowing with fiery rage. Prepare for battle.</p>
+          <button onclick="chooseAction('fight', 'findDragon', 'stage3')">Prepare for Battle</button>
+        `;
+      } else if (stage === 'stage3') {
+        stageMessage = 'The Black Dragon appears before you, its immense form filling the cavern. It roars, sending a shockwave through the air!';
+        stageDetail = `
+          <h3>Stage 3: The Final Battle</h3>
+          <p>The Black Dragon unleashes a torrent of flames as it charges toward you. The battle will be fierce, but your strength and courage may prevail.</p>
+          <button onclick="finalBattle('findDragon')">Face the Dragon</button>
+        `;
+      }
     } else if (quest === 'rescuePrincess') {
-      completionMessage = 'You are on your way to Nythera. The princess is in your sights...';
-    } else if (quest === 'conquerVortalis') {
-      completionMessage = 'You are braving the storms of Vortalis. The challenge begins now...';
+      if (stage === 'stage1') {
+        stageMessage = 'You enter the haunted forest on the way to Nythera. Strange noises echo around you as shadows move in the distance...';
+        stageDetail = `
+          <h3>Stage 1: The Haunted Forest</h3>
+          <p>The forest is filled with dark magic. You encounter a strange figure in the woods, a mysterious being that offers you guidance—or traps you in an illusion. Choose wisely...</p>
+          <button onclick="chooseAction('trust', 'rescuePrincess', 'stage2')">Trust the Mysterious Figure</button>
+          <button onclick="chooseAction('ignore', 'rescuePrincess', 'stage2')">Ignore and Proceed</button>
+        `;
+      } else if (stage === 'stage2') {
+        stageMessage = 'You are approaching the cursed castle... but it is protected by dangerous magical creatures!';
+        stageDetail = `
+          <h3>Stage 2: The Enchanted Castle</h3>
+          <p>You must face the guardians protecting the castle. You can either fight or try to outsmart them to continue.</p>
+          <button onclick="chooseAction('fight', 'rescuePrincess', 'stage3')">Fight the Guardians</button>
+          <button onclick="chooseAction('sneak', 'rescuePrincess', 'stage3')">Sneak Past the Guardians</button>
+        `;
+      } else if (stage === 'stage3') {
+        stageMessage = 'You reach the princess’s tower, but a powerful sorcerer blocks your way.';
+        stageDetail = `
+          <h3>Stage 3: Sorcerer’s Challenge</h3>
+          <p>The dark sorcerer stands in your path. He offers you a choice: defeat him in combat, or accept his dark pact to gain immense power for the rescue.</p>
+          <button onclick="finalRescue('rescuePrincess')">Refuse the Pact and Fight</button>
+          <button onclick="chooseAction('acceptPact', 'rescuePrincess', 'finalRescue')">Accept the Pact for Power</button>
+        `;
+      }
     }
 
-    alert(completionMessage);
-    // Optionally, redirect to a quest page or update progress
-    // window.location.href = `quest-${quest}.html`;
+    // Update stage details dynamically
+    alert(stageMessage);
+    document.getElementById('quest-details').innerHTML = stageDetail;
+  }
+
+  // Choose an action during quest stages
+  function chooseAction(action, quest, nextStage) {
+    let actionMessage = '';
+    if (action === 'fight') {
+      actionMessage = 'You choose to fight the enemies. It’s a fierce battle, but you manage to overcome them!';
+    } else if (action === 'sneak') {
+      actionMessage = 'You sneak past the enemies without alerting them. You gain an advantage as you proceed.';
+    } else if (action === 'trust') {
+      actionMessage = 'You decide to trust the mysterious figure. They lead you safely through the forest.';
+    } else if (action === 'ignore') {
+      actionMessage = 'You ignore the mysterious figure and continue on your path. Strange things seem to follow you...';
+    } else if (action === 'acceptPact') {
+      actionMessage = 'You accept the sorcerer’s pact. Your newfound powers give you an advantage, but at a dark cost.';
+    }
+
+    alert(actionMessage);
+    chooseStage(nextStage, quest);
+  }
+
+  // Handle the final stages (combat or rescue)
+  function finalBattle(quest) {
+    if (quest === 'findDragon') {
+      alert('You face the Black Dragon in an epic battle. Victory or defeat awaits!');
+      document.getElementById('quest-details').innerHTML = `
+        <h3>Final Battle: Dragon Fight</h3>
+        <p>Do you have the strength and wits to defeat the Black Dragon and bring peace to Emberdeep?</p>
+        <button onclick="endQuest('findDragon')">Victory!</button>
+        <button onclick="endQuest('findDragon')">Defeat...</button>
+      `;
+    }
+  }
+
+  function finalRescue(quest) {
+    if (quest === 'rescuePrincess') {
+      alert('You face the dark sorcerer, but your choices may define the fate of Princess Lyssa!');
+      document.getElementById('quest-details').innerHTML = `
+        <h3>Final Rescue</h3>
+        <p>Will you be able to defeat the sorcerer and rescue the princess, or will you be swayed by his dark promises?</p>
+        <button onclick="endQuest('rescuePrincess')">Rescue the Princess</button>
+        <button onclick="endQuest('rescuePrincess')">Succumb to Darkness</button>
+      `;
+    }
+  }
+
+  function endQuest(quest) {
+    if (quest === 'findDragon') {
+      alert('You have completed the quest!');
+    } else if (quest === 'rescuePrincess') {
+      alert('Princess Lyssa is safe! Your bravery will be remembered forever.');
+    }
   }
 </script>
