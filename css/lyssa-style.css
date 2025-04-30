@@ -1,0 +1,83 @@
+body {
+  font-family: 'Unbounded', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0b0b17;
+  color: #e0e0ff;
+  overflow-x: hidden;
+}
+
+.void-background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+  z-index: -2;
+  animation: pulse 10s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+.glow {
+  text-align: center;
+  color: #a761ff;
+  text-shadow: 0 0 10px #8c00ff, 0 0 20px #a761ff;
+}
+
+.subtitle {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.profile-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-img {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  border-radius: 50%;
+  border: 3px solid #8c00ff;
+  box-shadow: 0 0 20px #8c00ff;
+}
+
+.profile-section {
+  margin-top: 2rem;
+  background-color: rgba(18, 18, 28, 0.85);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(140, 0, 255, 0.3);
+}
+
+.profile-section h3 {
+  color: #b78bff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin: 0.5rem 0;
+}
+
+/* Optional dragon canvas */
+#dragon-canvas {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 300px;
+  z-index: 0;
+  pointer-events: none;
+}

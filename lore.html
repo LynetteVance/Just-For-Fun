@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lore | Elarion</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <img src="kaelthor.jpg" alt="Kael'thor" class="character-img">
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+    <source src="animation/world.mp4" type="video/mp4">
+  </video>
+  <header>
+    <h1 class="glow">Elarion</h1>
+    <p class="tagline">Realms Beyond the Veil</p>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="lore.html">Lore</a>
+  <a href="characters.html">Characters</a>
+  <a href="world.html">World</a>
+  <a href="contact.html">Contact</a>
+  <a href="quest.html">Quest</a>
+</nav>
+  </header>
+<video autoplay muted loop id="background-video">
+  <source src="magic.mp4" type="video/mp4">
+</video>
+  <main>
+    <section class="lore">
+      <h2>The Origin of the Realms</h2>
+      <p>Millennia ago, the Veil shattered and magic spilled into the void. Empires rose on floating continents, harnessing the arcane and the astral.</p>
+      <p>The five empires—Solari, Nythera, Vortalis, Emberdeep, and Zepharion—each control a different elemental force. Their balance sustains Elarion, but war looms as the Void returns...</p>
+    </section>
+  </main>
+
+  <footer>
+     <p>&copy; 2025 Constantine studios</p>
+  </footer>
+  <audio id="bg-music" autoplay loop>
+  <source src="your-music-file.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button onclick="toggleMusic()" id="music-btn">🔊</button>
+
+</body>
+<script>
+  function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    if (music.paused) {
+      music.play();
+      btn.textContent = '🔊';
+    } else {
+      music.pause();
+      btn.textContent = '🔇';
+    }
+  }
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World | Elarion</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <img src="kaelthor.jpg" alt="Kael'thor" class="character-img">
+</head>
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="animation/magic.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <h1 class="glow">Elarion</h1>
+    <p class="tagline">Realms Beyond the Veil</p>
+    <nav>
+  <a href="index.html">Home</a>
+  <a href="lore.html">Lore</a>
+  <a href="characters.html">Characters</a>
+  <a href="world.html">World</a>
+  <a href="contact.html">Contact</a>
+  <a href="quest.html">Quest</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="lore">
+      <h2>The Realms of Elarion</h2>
+      <p>Explore the floating empires:</p>
+      <ul>
+        <li><strong>Solari:</strong> Realm of Light and order.</li>
+        <li><strong>Nythera:</strong> Shrouded in the mystery of shadows.</li>
+        <li><strong>Vortalis:</strong> A storm-wracked land of arcane energy.</li>
+        <li><strong>Emberdeep:</strong> Forged in fire, ruled by flame-born kings.</li>
+        <li><strong>Zepharion:</strong> A skyborne empire of wind and prophecy.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Constantine studios</p>
+  </footer>
+  <audio id="bg-music" autoplay loop>
+  <source src="your-music-file.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button onclick="toggleMusic()" id="music-btn">🔊</button>
+
+</body>
+<script>
+  function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    if (music.paused) {
+      music.play();
+      btn.textContent = '🔊';
+    } else {
+      music.pause();
+      btn.textContent = '🔇';
+    }
+  }
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Elarion</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="animation/contact.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <h1 class="glow">Elarion</h1>
+    <p class="tagline">Realms Beyond the Veil</p>
+    <nav>
+  <a href="index.html" target="_blank">Home</a>
+  <a href="lore.html"target="_blank">Lore</a>
+  <a href="characters.html"target="_blank">Characters</a>
+  <a href="world.html"target="_blank">World</a>
+  <a href="contact.html"target="_blank">Contact</a>
+  <a href="quest.html"target="_blank">Quest</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="lore">
+      <h2>Contact the Arcanists</h2>
+      <p>For alliances, feedback, or to join the community of realm-weavers:</p>
+      <ul>
+        <li>Email: #Elarion@gmail.com#</li>
+        <li>Discord: <a href="#">Join our guild</a></li>
+        <li>Twitter: <a href="#">@ElarionGame</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Constantine studios</p>  </footer>
+  <audio id="bg-music" autoplay loop>
+  <source src="your-music-file.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button onclick="toggleMusic()" id="music-btn">🔊</button>
+
+</body>
+<script>
+  function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    if (music.paused) {
+      music.play();
+      btn.textContent = '🔊';
+    } else {
+      music.pause();
+      btn.textContent = '🔇';
+    }
+  }
+</script>
+</html>

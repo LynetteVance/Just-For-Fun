@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thorne - Warden of Solari</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/thorne-style.css" />
+    <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Georgia', serif;
+      text-align: center;
+    }
+    .profile-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    h1.glow {
+      color: #f1c40f;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    .subtitle {
+      color: #ccc;
+    }
+    .profile-img {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 20px;
+      border: 3px solid #f39c12;
+    }
+    .profile-section {
+      margin-top: 20px;
+    }
+    .profile-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .scroll-box {
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #222;
+      border: 1px solid #444;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .stats ul, .abilities ul, .artifacts ul {
+      list-style-type: none;
+      padding: 0;
+      color: #ddd;
+    }
+    .stats li, .abilities li, .artifacts li {
+      margin: 10px 0;
+    }
+    .battle-container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 2px solid #555;
+      border-radius: 12px;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .stats-bar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .portrait {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #777;
+    }
+    .bar-container {
+      background: #333;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 5px 0;
+    }
+    .bar {
+      height: 18px;
+      transition: width 0.3s;
+    }
+    .hp-bar { background: #e74c3c; }
+    .mana-bar { background: #3498db; }
+    .log {
+      background: #111;
+      padding: 10px;
+      height: 140px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      text-align: left;
+      border: 1px solid #333;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #555;
+      color: #fff;
+      padding: 10px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="sunflare-background"></div>
+
+  <main class="profile-container">
+    <h1 class="glow">Thorne</h1>
+    <h2 class="subtitle">Warden of Solari</h2>
+
+    <img src="thorne.jpg" alt="Thorne - Warden of Solari" class="profile-img"/>
+
+    <section class="profile-section">
+      <h3>Backstory</h3>
+      <p>
+        Born under the blazing sun of Solari, Thorne was destined to guard the sacred Sunwell, a source of immense power said to be tied to the heart of the sun itself. With an unyielding sense of duty, Thorne has protected his people for centuries, wielding the power of solar flames and divine light. A stoic figure, he stands as the eternal protector of Solari, never allowing the darkness to spread. His armor gleams with the power of the Sun, and his shield bears the mark of the Solari itself.
+      </p>
+
+      <h3>Stats</h3>
+      <ul>
+        <li><strong>Strength:</strong> 10/10</li>
+        <li><strong>Resilience:</strong> 9/10</li>
+        <li><strong>Speed:</strong> 7/10</li>
+        <li><strong>Charisma:</strong> 8/10</li>
+        <li><strong>Wisdom:</strong> 8/10</li>
+      </ul>
+
+      <h3>Abilities</h3>
+      <div class="scroll-box">
+        <ul>
+          <li>☀️ <strong>Solar Cleave:</strong> A powerful swing of his blade that unleashes a wave of pure solar energy</li>
+          <li>🛡️ <strong>Radiant Shield:</strong> Summons a protective barrier that absorbs damage and shines with the light of the Sun</li>
+          <li>🔥 <strong>Sunflare Burst:</strong> Conjures a burst of solar flame that incinerates all foes in a fiery radius</li>
+          <li>⚔️ <strong>Blaze of Glory:</strong> A heavenly strike that burns through any armor, calling down the wrath of the Sun</li>
+        </ul>
+      </div>
+
+      <h3>Artifacts</h3>
+      <ul>
+        <li>⚔️ <strong>Sunforged Blade:</strong> A blade forged in the heart of a dying star, glowing with eternal radiance</li>
+        <li>🛡️ <strong>Solari Shield:</strong> A divine shield that reflects both magical and physical damage, radiant with light</li>
+        <li>🌞 <strong>Solar Crest:</strong> An amulet that channels the energy of the Sun, granting the wielder immense strength and vitality</li>
+      </ul>
+    </section>
+  </main>
+
+  <canvas id="sunflare-canvas"></canvas>
+
+  <script src="thorne-magic.js"></script>
+  <!-- Battle Section -->
+  <div class="battle-container">
+    <h2>⚔️ Battle Begins: Kael'thor ⚔️</h2>
+
+    <div class="stats-bar-container">
+      <!-- Kael'thor Stats -->
+      <div>
+        <h3>🧙 Kael'thor</h3>
+        <div class="bar-container"><div class="bar hp-bar" id="player-hp-bar" style="width: 100%;"></div></div>
+        <p id="player-hp">Health: 100/100</p>
+        <div class="bar-container"><div class="bar mana-bar" id="player-mana-bar" style="width: 50%;"></div></div>
+        <p id="player-mana">Mana: 50/50</p>
+      </div>
+      <!-- Enemy Stats -->
+      <div>
+        <h3>👹 Enemy</h3>
+        <div class="bar-container"><div class="bar hp-bar" id="enemy-hp-bar" style="width: 100%;"></div></div>
+        <p id="enemy-hp">Health: 100/100</p>
+        <div class="bar-container"><div class="bar mana-bar" id="enemy-mana-bar" style="width: 50%;"></div></div>
+        <p id="enemy-mana">Mana: 50/50</p>
+      </div>
+    </div>
+
+    <div class="stats-bar-container">
+      <img src="2d/kaelthorm1.jpg" class="portrait" alt="Kael'thor Portrait">
+      <img src="2d/enemy_image.jpg" class="portrait" alt="Enemy Portrait">
+    </div>
+
+    <div class="log" id="battle-log">
+      <p>Battle Log:</p>
+      <p>Get ready to battle!</p>
+    </div>
+
+    <button onclick="attack()">Attack</button>
+    <button onclick="specialAttack()">Special Attack</button>
+    <button onclick="heal()">Heal</button>
+  </div>
+
+  <script>
+    let playerHP = 100;
+    let playerMana = 50;
+    let enemyHP = 100;
+    let enemyMana = 50;
+
+    const battleLog = document.getElementById("battle-log");
+    const playerHPText = document.getElementById("player-hp");
+    const playerManaText = document.getElementById("player-mana");
+    const playerHPBar = document.getElementById("player-hp-bar");
+    const playerManaBar = document.getElementById("player-mana-bar");
+    const enemyHPText = document.getElementById("enemy-hp");
+    const enemyManaText = document.getElementById("enemy-mana");
+    const enemyHPBar = document.getElementById("enemy-hp-bar");
+    const enemyManaBar = document.getElementById("enemy-mana-bar");
+
+    function attack() {
+      let damage = Math.floor(Math.random() * 10) + 5;
+      enemyHP -= damage;
+      logBattle(`You attacked and dealt ${damage} damage to the enemy.`);
+      if (enemyHP <= 0) {
+        enemyHP = 0;
+        logBattle("You defeated the enemy!");
+      }
+      updateStats();
+      if (enemyHP > 0) {
+       setTimeout(enemyTurn, 1000); // Delay enemy's turn by 1 second
+      }
+    }
+
+    function specialAttack() {
+      if (playerMana >= 10) {
+        let damage = Math.floor(Math.random() * 20) + 10;
+        enemyHP -= damage;
+        playerMana -= 10;
+        logBattle(`You used Special Attack and dealt ${damage} damage to the enemy. (-10 Mana)`);
+        if (enemyHP <= 0) {
+          enemyHP = 0;
+          logBattle("You defeated the enemy!");
+        }
+        updateStats();
+        if (enemyHP > 0) {
+          enemyTurn();  // Trigger enemy's attack after player's action
+        }
+      } else {
+        logBattle("Not enough Mana for Special Attack!");
+      }
+    }
+
+    function heal() {
+      if (playerMana >= 8) {
+        let healAmount = Math.floor(Math.random() * 15) + 5;
+        playerHP += healAmount;
+        if (playerHP > 100) playerHP = 100;
+        playerMana -= 8;
+        logBattle(`You healed yourself for ${healAmount} HP. (-8 Mana)`);
+        updateStats();
+        if (enemyHP > 0) {
+          setTimeout(enemyTurn, 1000); // Delay enemy's turn by 1 second
+        }
+      } else {
+        logBattle("Not enough Mana to heal!");
+      }
+    }
+
+    function logBattle(message) {
+      const newLog = document.createElement("p");
+      newLog.textContent = message;
+      battleLog.appendChild(newLog);
+    }
+
+    function updateStats() {
+      playerHPText.textContent = `Health: ${playerHP}/100`;
+      playerHPBar.style.width = playerHP + "%";
+      playerManaText.textContent = `Mana: ${playerMana}/50`;
+      playerManaBar.style.width = playerMana + "%";
+
+      enemyHPText.textContent = `Health: ${enemyHP}/100`;
+      enemyHPBar.style.width = enemyHP + "%";
+      enemyManaText.textContent = `Mana: ${enemyMana}/50`;
+      enemyManaBar.style.width = enemyMana + "%";
+    }
+
+    // Enemy attack function
+    function enemyTurn() {
+      let damage = Math.floor(Math.random() * 10) + 5;
+      playerHP -= damage;
+      logBattle(`The enemy attacks! You take ${damage} damage.`);
+      if (playerHP <= 0) {
+        playerHP = 0;
+        logBattle("You have fallen...");
+      }
+      updateStats();
+    }
+  </script>
+</body>
+</html>

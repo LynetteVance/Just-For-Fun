@@ -1,0 +1,94 @@
+body {
+  font-family: 'Unbounded', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #2b2b2b;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.sunflare-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #fcb04f 0%, #ffd133 40%, #ff9f00 100%);
+  z-index: -2;
+  animation: sunflare 10s ease-in-out infinite;
+}
+
+@keyframes sunflare {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+.glow {
+  text-align: center;
+  color: #ffcc33;
+  text-shadow: 0 0 15px #ffcc33, 0 0 30px #ff9900;
+}
+
+.subtitle {
+  text-align: center;
+  color: #ffcc99;
+  margin-bottom: 2rem;
+}
+
+.profile-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-img {
+  display: block;
+  margin: 0 auto;
+  width: 220px;
+  border-radius: 50%;
+  border: 5px solid #ffcc33;
+  box-shadow: 0 0 25px #ff9900;
+}
+
+.profile-section {
+  margin-top: 2rem;
+  background-color: rgba(48, 48, 48, 0.85);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 153, 0, 0.3);
+}
+
+.profile-section h3 {
+  color: #ffdd55;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin: 0.6rem 0;
+  font-size: 1.1rem;
+}
+
+.scroll-box {
+  background: #1a1a1a;
+  border-left: 5px solid #ff9900;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: inset 0 0 10px #ffcc66;
+}
+
+/* Magic Canvas */
+#sunflare-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}

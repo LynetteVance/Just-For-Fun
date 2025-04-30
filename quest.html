@@ -1,0 +1,74 @@
+<section id="quests">
+  <h2>Choose Your Quest</h2>
+  <p>Where will your adventure take you? Select a quest to begin your journey.</p>
+
+  <div class="quest-options">
+    <button onclick="startQuest('findDragon')" class="quest-button" id="quest-find-dragon">
+      <img src="dragon-icon.png" alt="Find the Dragon" class="quest-icon"> 
+      <span>Find the Dragon in Emberdeep</span>
+    </button>
+    <button onclick="startQuest('rescuePrincess')" class="quest-button" id="quest-rescue-princess">
+      <img src="princess-icon.png" alt="Rescue Princess Lyssa" class="quest-icon">
+      <span>Rescue Princess Lyssa from Nythera</span>
+    </button>
+    <button onclick="startQuest('conquerVortalis')" class="quest-button" id="quest-conquer-vortalis">
+      <img src="storm-icon.png" alt="Conquer Vortalis" class="quest-icon">
+      <span>Conquer the Storms of Vortalis</span>
+    </button>
+  </div>
+
+  <div id="quest-details">
+    <!-- Quest Details will be dynamically updated here -->
+  </div>
+</section>
+
+<script>
+  function startQuest(quest) {
+    let message = '';
+    let questDetail = '';
+
+    // Determine the quest description based on the selected quest
+    if (quest === 'findDragon') {
+      message = 'You embark on a perilous journey to Emberdeep to face the legendary Black Dragon...';
+      questDetail = `
+        <h3>Quest: Find the Dragon in Emberdeep</h3>
+        <p>The air is thick with the smoke of burning villages as you venture deeper into the heart of Emberdeep. The Black Dragon awaits, guarding treasures and ancient knowledge.</p>
+        <button onclick="completeQuest('findDragon')">Begin Quest</button>
+      `;
+    } else if (quest === 'rescuePrincess') {
+      message = 'You make your way to the dark and mystical lands of Nythera to rescue Princess Lyssa...';
+      questDetail = `
+        <h3>Quest: Rescue Princess Lyssa from Nythera</h3>
+        <p>Dark clouds swirl above as you enter Nythera, where sorcery and shadow reign. The princess is held captive in the heart of the haunted castle, surrounded by mythical creatures.</p>
+        <button onclick="completeQuest('rescuePrincess')">Begin Quest</button>
+      `;
+    } else if (quest === 'conquerVortalis') {
+      message = 'A fierce storm rages around you as you set foot in the windswept land of Vortalis...';
+      questDetail = `
+        <h3>Quest: Conquer the Storms of Vortalis</h3>
+        <p>The winds howl like wolves as you approach the stormy land of Vortalis. Only the bravest dare challenge its unpredictable nature and fierce elemental forces.</p>
+        <button onclick="completeQuest('conquerVortalis')">Begin Quest</button>
+      `;
+    }
+
+    // Display the quest details dynamically
+    alert(message);
+    document.getElementById('quest-details').innerHTML = questDetail;
+  }
+
+  function completeQuest(quest) {
+    let completionMessage = '';
+
+    if (quest === 'findDragon') {
+      completionMessage = 'You have set off to Emberdeep. The Dragon awaits...';
+    } else if (quest === 'rescuePrincess') {
+      completionMessage = 'You are on your way to Nythera. The princess is in your sights...';
+    } else if (quest === 'conquerVortalis') {
+      completionMessage = 'You are braving the storms of Vortalis. The challenge begins now...';
+    }
+
+    alert(completionMessage);
+    // Optionally, redirect to a quest page or update progress
+    // window.location.href = `quest-${quest}.html`;
+  }
+</script>

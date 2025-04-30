@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elarion: Realms Beyond the Veil</title>
+  <link rel="stylesheet" href="css/style.css"/>
+     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;  /* Viewport height */
+        }
+
+        .resize-box {
+            width: 50vw;  /* 50% of viewport width */
+            height: 50vh;  /* 50% of viewport height */
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2vw;  /* Text scales with viewport width */
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #000; color: #fff;">
+ <video autoplay muted loop id="background-video">
+    <source src="animation/trad.mp4" type="video/mp4">
+  </video>
+  <header style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.7);">
+    <h1 style="font-size: 3rem; color: #f1c40f;">Elarion</h1>
+    <p style="font-style: italic; font-size: 1.2rem;">Realms Beyond the Veil</p>
+    <nav style="margin-top: 10px;">
+      <a href="index.html" style="margin: 0 10px; color: #ccc;"target="_blank">Home</a>
+      <a href="lore.html" style="margin: 0 10px; color: #ccc;"target="_blank">Lore</a>
+      <a href="characters.html" style="margin: 0 10px; color: #ccc;"target="_blank">Characters</a>
+      <a href="world.html" style="margin: 0 10px; color: #ccc;"target="_blank">World</a>
+      <a href="contact.html" style="margin: 0 10px; color: #ccc;"target="_blank">Contact</a>
+      <a href="quest.html" style="margin: 0 10px; color: #ccc;"target="_blank">Quest</a>
+    </nav>
+  </header>
+
+  <main style="text-align: center; padding: 40px 20px;">
+    <h2 style="font-size: 2rem; margin-bottom: 10px;">Elarion World Map</h2>
+    <p style="margin-bottom: 30px;">Click on a region or a character icon to explore more.</p>
+
+    <div style="position: relative; display: inline-block; max-width: 800px;">
+      <!-- World Map Image -->
+      <img src="images/map.jpg" usemap="#el-world-map" alt="Elarion World Map" style="width: 100%; border: 3px solid #555; border-radius: 8px;">
+
+      <!-- Character Icons on the Map -->
+      <a href="characters/kael'thor.html " target="_blank" title="Kael'thor"
+         style="position: absolute; top: 29%; left: 42%; transform: translate(-50%, -50%);">
+        <img src="images/icons/kaelthor2.jpg" alt="Kael'thor" style="width: 48px; height: 48px;">
+      </a>
+
+      <a href="characters/lyssa_nyr.html" target="_blank" title="Lyssa Nyr"
+         style="position: absolute; top: 54%; left: 70%; transform: translate(-50%, -50%);">
+        <img src="images/icons/lyssa1.jpg" alt="Lyssa Nyr" style="width: 48px; height: 48px;">
+      </a>
+
+      <a href="characters/thorne.html" target="_blank" title="Thorne"
+         style="position: absolute; top: 34%; left: 55%; transform: translate(-50%, -50%);">
+        <img src="images/icons/thorne2.jpg" alt="Thorne" style="width: 48px; height: 48px;">
+      </a>
+    </div>
+
+    <!-- Optional Clickable Regions (you can keep or remove) -->
+    <map name="el-world-map">
+      <area shape="rect" coords="50,50,200,200" alt="Emberdeep" href="#">
+      <area shape="circle" coords="300,100,80" alt="Solari" href="#l">
+      <area shape="circle" coords="500,200,70" alt="Nythera" href="#">
+      <area shape="rect" coords="100,350,300,500" alt="Vortalis" href="#">
+    </map>
+  </main>
+
+  <footer style="text-align: center; padding: 20px; background-color: rgba(0,0,0,0.8); color: #777;">
+    <p>&copy; 2025 Elarion Studios</p>
+  </footer>
+  <audio id="bg-music" autoplay loop>
+    <source src="your-music-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button onclick="toggleMusic()" id="music-btn">🔊</button>
+
+  <script>
+    function toggleMusic() {
+      const music = document.getElementById('bg-music');
+      const btn = document.getElementById('music-btn');
+      if (music.paused) {
+        music.play();
+        btn.textContent = '🔊';
+      } else {
+        music.pause();
+        btn.textContent = '🔇';
+      }
+    }
+  </script>
+</body>
+</html>

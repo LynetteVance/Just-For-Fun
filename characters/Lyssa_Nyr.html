@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lyssa Nyr - Void Seer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cs/lyssa-style.css" />
+    <style>
+      body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Georgia', serif;
+      text-align: center;
+    }
+    .profile-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    h1.glow {
+      color: #f1c40f;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    .subtitle {
+      color: #ccc;
+    }
+    .profile-img {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 20px;
+      border: 3px solid #f39c12;
+    }
+    .profile-section {
+      margin-top: 20px;
+    }
+    .profile-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .scroll-box {
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #222;
+      border: 1px solid #444;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .stats ul, .abilities ul, .artifacts ul {
+      list-style-type: none;
+      padding: 0;
+      color: #ddd;
+    }
+    .stats li, .abilities li, .artifacts li {
+      margin: 10px 0;
+    }
+    .battle-container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 2px solid #555;
+      border-radius: 12px;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .stats-bar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .portrait {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #777;
+    }
+    .bar-container {
+      background: #333;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 5px 0;
+    }
+    .bar {
+      height: 18px;
+      transition: width 0.3s;
+    }
+    .hp-bar { background: #e74c3c; }
+    .mana-bar { background: #3498db; }
+    .log {
+      background: #111;
+      padding: 10px;
+      height: 140px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      text-align: left;
+      border: 1px solid #333;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #555;
+      color: #fff;
+      padding: 10px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="void-background"></div>
+
+  <main class="profile-container">
+    <h1 class="glow">Lyssa Nyr</h1>
+    <h2 class="subtitle">The Last Void Seer</h2>
+
+    <img src="lyssa.jpg" alt="Lyssa Nyr" class="profile-img"/>
+
+    <section class="profile-section">
+      <h3>Backstory</h3>
+      <p>
+        Lyssa Nyr was born beneath the twin moons of Nythera, destined to witness visions no mortal should bear. After the fall of the Void Temple, she wandered the shattered realms with only her visions to guide her. Many say she speaks in riddles, others call her a prophet of doom. Yet all agree: she sees what others cannot.
+      </p>
+
+      <h3>Stats</h3>
+      <ul class="stats">
+        <li><strong>Strength:</strong> 4/10</li>
+        <li><strong>Intelligence:</strong> 9/10</li>
+        <li><strong>Agility:</strong> 7/10</li>
+        <li><strong>Charisma:</strong> 8/10</li>
+      </ul>
+
+      <h3>Abilities</h3>
+      <div class="scroll-box">
+        <ul>
+          <li>🔮 <strong>Void Sight:</strong> See possible futures and hidden paths</li>
+          <li>🖤 <strong>Shadow Manipulation:</strong> Cloak herself or mislead enemies</li>
+          <li>🌀 <strong>Mind Control:</strong> Bend weak minds to her will</li>
+          <li>🌫️ <strong>Phasewalk:</strong> Travel through shadow planes instantly</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div class="battle-container">
+    <h1>⚔️ Elarion: Battle Begins ⚔️</h1>
+
+    <div class="stats">
+      <div>
+        <h3>🧙 Lyssa Nyr</h3>
+        <div class="bar-container"><div class="bar hp-bar" id="player-hp-bar" style="width: 100%;"></div></div>
+        <p id="player-hp-text">HP: 100/100</p>
+        <div class="bar-container"><div class="bar mana-bar" id="player-mana-bar" style="width: 100%;"></div></div>
+        <p id="player-mana-text">Mana: 50/50</p>
+      </div>
+
+      <div>
+        <img id="enemy-img" class="portrait" src="" alt="Enemy" />
+        <h3 id="enemy-name">Enemy</h3>
+        <div class="bar-container"><div class="bar hp-bar" id="enemy-hp-bar" style="width: 100%;"></div></div>
+        <p id="enemy-hp-text">HP: ?</p>
+      </div>
+    </div>
+
+    <div class="stats-bar-container">
+      <img src="2d/kaelthorm1.jpg" class="portrait" alt="Kael'thor Portrait">
+      <img src="2d/enemy_image.jpg" class="portrait" alt="Enemy Portrait">
+    </div>
+
+    <div class="log" id="battle-log">
+      <p>Battle Log:</p>
+      <p>Get ready to battle!</p>
+    </div>
+    <div>
+      <button onclick="playerAttack()">Attack</button>
+      <button onclick="castFireball()">Fireball (-10 MP)</button>
+      <button onclick="heal()">Heal (+15 HP)</button>
+    </div>
+  </div>
+
+  <script>
+    const enemies = [
+      {
+        name: "Umbra Wraith",
+        hp: 80,
+        maxHp: 80,
+        img: "images/enemies/umbra_wraith.jpg"
+      },
+      {
+        name: "Emberwolf",
+        hp: 60,
+        maxHp: 60,
+        img: "images/enemies/emberwolf.jpg"
+      },
+      {
+        name: "Frost Revenant",
+        hp: 100,
+        maxHp: 100,
+        img: "images/enemies/frost_revenant.jpg"
+      }
+    ];
+
+    let player = { hp: 100, mana: 50, maxHp: 100, maxMana: 50 };
+    let enemy = {};
+
+
+
+    function initBattle() {
+      enemy = JSON.parse(JSON.stringify(enemies[Math.floor(Math.random() * enemies.length)]));
+      document.getElementById("enemy-name").textContent = enemy.name;
+      document.getElementById("enemy-img").src = enemy.img;
+      updateStats();
+      log(`A wild ${enemy.name} appears!`);
+    }
+
+    function updateStats() {
+      // Player
+      document.getElementById("player-hp-text").textContent = `HP: ${player.hp}/${player.maxHp}`;
+      document.getElementById("player-hp-bar").style.width = `${(player.hp / player.maxHp) * 100}%`;
+      document.getElementById("player-mana-text").textContent = `Mana: ${player.mana}/${player.maxMana}`;
+      document.getElementById("player-mana-bar").style.width = `${(player.mana / player.maxMana) * 100}%`;
+
+      // Enemy
+      document.getElementById("enemy-hp-text").textContent = `HP: ${enemy.hp}/${enemy.maxHp}`;
+      document.getElementById("enemy-hp-bar").style.width = `${(enemy.hp / enemy.maxHp) * 100}%`;
+    }
+
+    function log(msg) {
+      logDiv.innerHTML += `<p>${msg}</p>`;
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    function disableButtons() {
+      document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+    }
+
+    function checkGameOver() {
+      if (player.hp <= 0) {
+        log("Kael'thor has fallen... 💀");
+        disableButtons();
+      } else if (enemy.hp <= 0) {
+        log(`${enemy.name} is defeated! 🌟`);
+        disableButtons();
+      }
+    }
+
+    function endTurn() {
+      setTimeout(enemyAttack, 1000);
+    }
+
+    function playerAttack() {
+      const dmg = Math.floor(Math.random() * 10 + 5);
+      enemy.hp = Math.max(enemy.hp - dmg, 0);
+      log(`Kael'thor strikes with his staff for ${dmg} damage.`);
+      updateStats();
+      checkGameOver();
+      if (enemy.hp > 0) endTurn();
+    }
+
+    function castFireball() {
+      if (player.mana >= 10) {
+        const dmg = Math.floor(Math.random() * 20 + 10);
+        player.mana -= 10;
+        enemy.hp = Math.max(enemy.hp - dmg, 0);
+        log(`🔥 Kael'thor casts Fireball! It hits for ${dmg} damage.`);
+        updateStats();
+        checkGameOver();
+        if (enemy.hp > 0) endTurn();
+      } else {
+        log("Not enough mana to cast Fireball!");
+      }
+    }
+
+    function heal() {
+      if (player.mana >= 8) {
+        const healAmount = 15;
+        player.hp = Math.min(player.hp + healAmount, player.maxHp);
+        player.mana -= 8;
+        log(`✨ Kael'thor heals himself for ${healAmount} HP.`);
+        updateStats();
+        endTurn();
+      } else {
+        log("Not enough mana to heal!");
+      }
+    }
+
+    function enemyAttack() {
+      const dmg = Math.floor(Math.random() * 12 + 5);
+      player.hp = Math.max(player.hp - dmg, 0);
+      log(`${enemy.name} attacks! Kael'thor takes ${dmg} damage.`);
+      updateStats();
+      checkGameOver();
+    }
+
+    // Start game
+    initBattle();
+  </script>
+</body>
+</html>
