@@ -189,122 +189,101 @@
   </div>
 
   <script>
-    const enemies = [
-      {
-        name: "Umbra Wraith",
-        hp: 80,
-        maxHp: 80,
-        img: "images/enemies/umbra_wraith.jpg"
-      },
-      {
-        name: "Emberwolf",
-        hp: 60,
-        maxHp: 60,
-        img: "images/enemies/emberwolf.jpg"
-      },
-      {
-        name: "Frost Revenant",
-        hp: 100,
-        maxHp: 100,
-        img: "images/enemies/frost_revenant.jpg"
+    let playerHP = 100;
+    let playerMana = 100;
+    let enemyHP = 100;
+    let enemyMana = 100;
+
+    const battleLog = document.getElementById("battle-log");
+    const playerHPText = document.getElementById("player-hp");
+    const playerManaText = document.getElementById("player-mana");
+    const playerHPBar = document.getElementById("player-hp-bar");
+    const playerManaBar = document.getElementById("player-mana-bar");
+    const enemyHPText = document.getElementById("enemy-hp");
+    const enemyManaText = document.getElementById("enemy-mana");
+    const enemyHPBar = document.getElementById("enemy-hp-bar");
+    const enemyManaBar = document.getElementById("enemy-mana-bar");
+
+    function attack() {
+      let damage = Math.floor(Math.random() * 10) + 5;
+      enemyHP -= damage;
+      logBattle(`You attacked and dealt ${damage} damage to the enemy.`);
+      if (enemyHP <= 0) {
+        enemyHP = 0;
+        logBattle("You defeated the enemy!");
       }
-    ];
-
-    let player = { hp: 100, mana: 50, maxHp: 100, maxMana: 50 };
-    let enemy = {};
-
-
-
-    function initBattle() {
-      enemy = JSON.parse(JSON.stringify(enemies[Math.floor(Math.random() * enemies.length)]));
-      document.getElementById("enemy-name").textContent = enemy.name;
-      document.getElementById("enemy-img").src = enemy.img;
       updateStats();
-      log(`A wild ${enemy.name} appears!`);
-    }
-
-    function updateStats() {
-      // Player
-      document.getElementById("player-hp-text").textContent = `HP: ${player.hp}/${player.maxHp}`;
-      document.getElementById("player-hp-bar").style.width = `${(player.hp / player.maxHp) * 100}%`;
-      document.getElementById("player-mana-text").textContent = `Mana: ${player.mana}/${player.maxMana}`;
-      document.getElementById("player-mana-bar").style.width = `${(player.mana / player.maxMana) * 100}%`;
-
-      // Enemy
-      document.getElementById("enemy-hp-text").textContent = `HP: ${enemy.hp}/${enemy.maxHp}`;
-      document.getElementById("enemy-hp-bar").style.width = `${(enemy.hp / enemy.maxHp) * 100}%`;
-    }
-
-    function log(msg) {
-      logDiv.innerHTML += `<p>${msg}</p>`;
-      logDiv.scrollTop = logDiv.scrollHeight;
-    }
-
-    function disableButtons() {
-      document.querySelectorAll("button").forEach(btn => btn.disabled = true);
-    }
-
-    function checkGameOver() {
-      if (player.hp <= 0) {
-        log("Kael'thor has fallen... 💀");
-        disableButtons();
-      } else if (enemy.hp <= 0) {
-        log(`${enemy.name} is defeated! 🌟`);
-        disableButtons();
+      if (enemyHP > 0) {
+       setTimeout(enemyTurn, 1000); // Delay enemy's turn by 1 second
       }
     }
 
-    function endTurn() {
-      setTimeout(enemyAttack, 1000);
-    }
-
-    function playerAttack() {
-      const dmg = Math.floor(Math.random() * 10 + 5);
-      enemy.hp = Math.max(enemy.hp - dmg, 0);
-      log(`Kael'thor strikes with his staff for ${dmg} damage.`);
-      updateStats();
-      checkGameOver();
-      if (enemy.hp > 0) endTurn();
-    }
-
-    function castFireball() {
-      if (player.mana >= 10) {
-        const dmg = Math.floor(Math.random() * 20 + 10);
-        player.mana -= 10;
-        enemy.hp = Math.max(enemy.hp - dmg, 0);
-        log(`🔥 Kael'thor casts Fireball! It hits for ${dmg} damage.`);
+    function specialAttack() {
+      if (playerMana >= 10) {
+        let damage = Math.floor(Math.random() * 20) + 10;
+        enemyHP -= damage;
+        playerMana -= 10;
+        logBattle(`You used Special Attack and dealt ${damage} damage to the enemy. (-10 Mana)`);
+        if (enemyHP <= 0) {
+          enemyHP = 0;
+          logBattle("You defeated the enemy!");
+        }
         updateStats();
-        checkGameOver();
-        if (enemy.hp > 0) endTurn();
+        if (enemyHP > 0) {
+          enemyTurn();  // Trigger enemy's attack after player's action
+        }
       } else {
-        log("Not enough mana to cast Fireball!");
+        logBattle("Not enough Mana for Special Attack!");
       }
     }
 
     function heal() {
-      if (player.mana >= 8) {
-        const healAmount = 15;
-        player.hp = Math.min(player.hp + healAmount, player.maxHp);
-        player.mana -= 8;
-        log(`✨ Kael'thor heals himself for ${healAmount} HP.`);
+      if (playerMana >= 8) {
+        let healAmount = Math.floor(Math.random() * 15) + 5;
+        playerHP += healAmount;
+        if (playerHP > 100) playerHP = 100;
+        playerMana -= 8;
+        logBattle(`You healed yourself for ${healAmount} HP. (-8 Mana)`);
         updateStats();
-        endTurn();
+        if (enemyHP > 0) {
+          setTimeout(enemyTurn, 1000); // Delay enemy's turn by 1 second
+        }
       } else {
-        log("Not enough mana to heal!");
+        logBattle("Not enough Mana to heal!");
       }
     }
 
-    function enemyAttack() {
-      const dmg = Math.floor(Math.random() * 12 + 5);
-      player.hp = Math.max(player.hp - dmg, 0);
-      log(`${enemy.name} attacks! Kael'thor takes ${dmg} damage.`);
-      updateStats();
-      checkGameOver();
+    function logBattle(message) {
+      const newLog = document.createElement("p");
+      newLog.textContent = message;
+      battleLog.appendChild(newLog);
     }
 
-    // Start game
-    initBattle();
+    function updateStats() {
+      playerHPText.textContent = `Health: ${playerHP}/100`;
+      playerHPBar.style.width = playerHP + "%";
+      playerManaText.textContent = `Mana: ${playerMana}/50`;
+      playerManaBar.style.width = playerMana + "%";
+
+      enemyHPText.textContent = `Health: ${enemyHP}/100`;
+      enemyHPBar.style.width = enemyHP + "%";
+      enemyManaText.textContent = `Mana: ${enemyMana}/50`;
+      enemyManaBar.style.width = enemyMana + "%";
+    }
+
+    // Enemy attack function
+    function enemyTurn() {
+      let damage = Math.floor(Math.random() * 10) + 5;
+      playerHP -= damage;
+      logBattle(`The enemy attacks! You take ${damage} damage.`);
+      if (playerHP <= 0) {
+        playerHP = 0;
+        logBattle("You have fallen...");
+      }
+      updateStats();
+    }
   </script>
 </body>
 </html>
+
 
